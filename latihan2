@@ -1,0 +1,29 @@
+import 'dart:io';
+
+int binarySearch(List<int> L, int kiri, int kanan, int n) {
+  if (kiri > kanan) {
+    return -1;
+  }
+  int tengah = (kiri + kanan) ~/ 2;
+  if (L[tengah] == n) {
+    return tengah;
+  }
+  if (L[tengah] < n) {
+    return binarySearch(L, tengah + 1, kanan, n);
+  } else {
+    return binarySearch(L, kiri, tengah - 1, n);
+  }
+}
+
+void main() {
+  var L = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  var kiri = 0;
+  var kanan = L.length - 1;
+
+  stdout.write('Masukkan angka yang ingin dicari: ');
+  var input = stdin.readLineSync();
+  var n = int.tryParse(input ?? '') ?? -1;
+
+  var hasil = binarySearch(L, kiri, kanan, n);
+  print('${n} ditemukan pada index ${hasil}');
+}
